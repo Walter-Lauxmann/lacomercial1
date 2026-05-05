@@ -1,0 +1,152 @@
+:root {
+    --blanco: #ffffff;
+    --oscuro: #202020;
+    --gris: #757575;
+    --gris-claro: #cccccc;
+    --primario: #ffc107;
+    --secundario: #0097a7;
+}
+
+html {
+    font-size: 67.5%;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--oscuro);
+    background-image: linear-gradient(to top, var(--gris-claro) 0%, var(--blanco) 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+}
+
+header {
+  background-color: var(--secundario);
+}
+
+h1 {
+  color: var(--primario);
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 3.8rem;
+}
+
+h2 {
+    font-size: 2.8rem;
+    color: var(--secundario);
+}
+
+h3 {
+    font-size: 1.8rem;
+    color: var(--secundario);
+}
+
+/* Estilo del menú de navegación */
+.menu {
+    background-color: var(--oscuro);
+    color: var(--blanco);
+}
+
+.menu-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .menu-flex {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+}
+
+.menu ul li {
+    margin: 2px;
+    padding: 2px;
+    border: 1px solid var(--gris-claro);
+}
+
+.menu ul li a {
+    display: block;
+    width: 100px;
+    padding: 4px 0;
+    text-decoration: none;
+    color: var(--blanco);
+    text-align: center;
+    font-size: 11px;
+    border-left: 10px solid var(--gris-claro);
+}
+
+.menu ul li a:hover {
+    color: var(--primario);
+    background-color: var(--secundario);
+    border-left-color: var(--primario);
+}
+
+.contenedor {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/** Sección principal **/
+.principal {
+    background-image: url(../imagenes/slide4.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 450px;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.contenido-principal {
+    position: absolute;
+    background-color: rgba(0,0,0,0.7);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--blanco);
+}
+
+.principal-icono {
+    display: flex;
+    align-items: flex-end;
+}
+
+.boton {
+    background-color: var(--secundario);
+    color: var(--blanco);
+    padding: 1rem 3rem;
+    margin-top: 3rem;
+    font-size: 2rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    width: 90%;
+    text-align: center;
+    border: none;
+}
+
+@media (min-width: 768px) {
+    .boton {
+        width: auto;
+    }
+}
+
+footer {
+    text-align: center;
+}
