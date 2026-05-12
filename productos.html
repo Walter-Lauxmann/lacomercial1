@@ -66,9 +66,86 @@
                 <a href="#" class="boton">Comprar</a>
             </article>
         </section>
+        
+        <!-- Carrito de compras -->
+        <section class="carrito-compras">
+            <h3>Carrito de compras</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Importe</th>
+                    </tr>                    
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Código">103</td>
+                        <td data-label="Nombre">iPhone SE</td>
+                        <td data-label="Cantidad">
+                            <input 
+                                type="number" 
+                                name="cantidad1" 
+                                id="cantidad1"
+                                value="0"
+                                min="0"
+                                onchange="calcular()"
+                                />
+                        </td>
+                        <td data-label="Precio">$ <span id="precio1">1749999</span>.- </td>
+                        <td data-label="Importe">$ <span id="importe1"></span>.- </td>
+                    </tr>
+                    <tr>
+                        <td data-label="Código">102</td>
+                        <td data-label="Nombre">Motorola Moto G-100</td>
+                        <td data-label="Cantidad">
+                            <input 
+                                type="number" 
+                                name="cantidad2" 
+                                id="cantidad2"
+                                value="0"
+                                min="0"
+                                onchange="calcular()"
+                                />
+                        </td>
+                        <td data-label="Precio">$ <span id="precio2">749999</span>.- </td>
+                        <td data-label="Importe">$ <span id="importe2"></span>.- </td>
+                    </tr>
+                    <tr>
+                        <td data-label="Código">104</td>
+                        <td data-label="Nombre">iPhone 11 Pro Max</td>
+                        <td data-label="Cantidad">
+                            <input 
+                                type="number" 
+                                name="cantidad3" 
+                                id="cantidad3"
+                                value="0"
+                                min="0"
+                                onchange="calcular()"
+                                />
+                        </td>
+                        <td data-label="Precio">$ <span id="precio3">2328990</span>.- </td>
+                        <td data-label="Importe">$ <span id="importe3"></span>.- </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td>Total</td>
+                        <td>$ <span id="total"></span>.-</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
     </main>
     <footer>
         <p>La Comercial - Todos los derechos reservados - 2026</p>
     </footer>
+
+    <!-- Scripts -->
+    <script src="./controladores/carrito-compras.js"></script>
 </body>
 </html>

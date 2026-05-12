@@ -184,6 +184,78 @@ h3 {
     width: 75%;
 }
 
+/* Carrito de compras */
+.carrito-compras {
+    background-color: var(--oscuro);
+    color: var(--blanco);
+}
+
+.carrito-compras table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.carrito-compras th, .carrito-compras td {
+    padding: 12px;
+    border: 1px solid var(--gris);
+    text-align: left;
+}
+
+.carrito-compras table thead {
+    background-color: var(--secundario);    
+}
+
+.carrito-compras table tfoot {
+    background-color: var(--primario);
+    color: var(--oscuro);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Modo móvil */
+@media screen and (max-width: 600px) {
+    .carrito-compras table, thead, tbody, tfoot, th, td, tr {
+        display: block;
+    }
+
+    .carrito-compras thead tr {
+        display: none;
+    }
+
+    .carrito-compras tr {
+        margin-bottom: 20px;
+        border: 2px solid var(--secundario);
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .carrito-compras td {
+        border: none;
+        position: relative;
+        padding-left: 50% !important;
+        text-align: right;
+        border-bottom: 1px solid var(--gris);
+    }
+
+    .carrito-compras td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 40%;
+        font-weight: bold;
+        text-align: left;
+        color: var(--gris);
+    }
+
+    .carrito-compras tfoot tr {
+        border: none;
+    }
+
+    .carrito-compras tfoot td:first-child {
+        display: none;
+    }
+}
+
 footer {
     text-align: center;
 }
