@@ -32,8 +32,8 @@ function agregar(boton) {
                 onchange="calcular()"
                 />
         </td>
-        <td data-label="Precio">$ <span name="precio" id="precio1">${precio}</span>.- </td>
-        <td data-label="Importe">$ <span name="importe" id="importe_${codigo}">${precio}</span>.-</td>
+        <td data-label="Precio">$ <span name="precios" id="precio_${codigo}">${precio}</span>.- </td>
+        <td data-label="Importe">$ <span name="importes" id="importe_${codigo}">${precio}</span>.-</td>
         <td><button class="boton-eliminar" onclick="eliminar(this)">X</button></td>
     `;
 
@@ -53,8 +53,8 @@ function eliminar(boton) {
 function calcular() {
     /* Elementos DOM */
     const cantidades = document.getElementsByName('cantidad');
-    const precios = document.querySelectorAll('[name="precio"]');
-    const importes = document.querySelectorAll('[name="importe"]');
+    const precios = document.querySelectorAll('[name="precios"]');
+    const importes = document.querySelectorAll('[name="importes"]');
 
     /* Variables */
     let total = 0;
