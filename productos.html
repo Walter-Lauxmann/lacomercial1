@@ -22,51 +22,7 @@
     </nav>
     <main class="contenedor sombra">
         <h2>Listado de productos</h2>
-        <section class="servicios">
-            <article class="servicio">
-                <h3><span name="codigo">103</span> - <span name="nombre">iPhone SE</span></h3>
-                <div class="servicio-icono">
-                    <img src="./imagenes/productos/iPhone-SE-Black.jpg" alt="">
-                </div>
-                <p>
-                    <img src="./imagenes/memory.svg" alt="">Procesador: A13 Bionic <br>
-                    <img src="./imagenes/storage.svg" alt="">Almacenamiento: 128 GB <br>
-                    <img src="./imagenes/photo_camera.svg" alt="">Cámaras: 7 Mpx / 12 Mpx <br>
-                    <img src="./imagenes/aod.svg" alt="">Pantalla: 4,7 IPS Retina
-                </p>
-                <h4>$ <span name="precio">1749999</span>.-</h4>
-
-                <button class="boton" onclick="agregar(this)">Comprar</button>
-                
-            </article>
-            <article class="servicio">
-                <h3><span name="codigo">102</span> - <span name="nombre">Motorola Moto G-100</span></h3>
-                <div class="servicio-icono">
-                    <img src="./imagenes/productos/Motorola-Moto-G100.jpg" alt="">
-                </div>
-                <p>
-                    <img src="./imagenes/memory.svg" alt="">Procesador: Octa Core (3,2 GHz) <br>
-                    <img src="./imagenes/storage.svg" alt="">Almacenamiento: 128 GB <br>
-                    <img src="./imagenes/photo_camera.svg" alt="">Cámaras: 13 Mpx / 64 Mpx <br>
-                    <img src="./imagenes/aod.svg" alt="">Pantalla: 6,7 FHD+ LTPS
-                </p>
-                <h4>$ <span name="precio">749999</span>.-</h4>
-                <button class="boton" onclick="agregar(this)">Comprar</button>
-            </article>
-            <article class="servicio">
-                <h3><span name="codigo">104</span> - <span name="nombre">iPhone 11 Pro Max</span></h3>
-                <div class="servicio-icono">
-                    <img src="./imagenes/productos/Iphone-11-Pro-Max.jpg" alt="">
-                </div>
-                <p>
-                    <img src="./imagenes/memory.svg" alt="">Procesador: A13 Bionic <br>
-                    <img src="./imagenes/storage.svg" alt="">Almacenamiento: 256 GB <br>
-                    <img src="./imagenes/photo_camera.svg" alt="">Cámaras: 12 Mpx / 12 Mpx <br>
-                    <img src="./imagenes/aod.svg" alt="">Pantalla: 5,8 IPS Super Retina
-                </p>
-                <h4>$ <span name="precio">2328990</span>.-</h4>
-                <button class="boton" onclick="agregar(this)">Comprar</button>
-            </article>
+        <section class="servicios" id="lista-productos">
         </section>   
         
         <!-- Carrito de compras -->
@@ -82,8 +38,7 @@
                         <th>Importe</th>
                     </tr>
                 </thead>
-                <tbody id="lista-tabla">
-                    
+                <tbody id="lista-tabla">                    
                 </tbody>
                 <tfoot>
                     <tr>
@@ -102,6 +57,7 @@
     </footer>
 
     <!-- Scripts -->
+    <script type="module" src="./controladores/lista-productos.js"></script>
     <script src="./controladores/carrito-compras.js"></script>
 </body>
 </html>
