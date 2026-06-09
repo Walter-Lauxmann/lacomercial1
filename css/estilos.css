@@ -263,3 +263,154 @@ h3 {
 footer {
     text-align: center;
 }
+
+/* --- ADMIN & DIALOG STYLES --- */
+.titulo-admin-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.boton-admin {
+    background-color: var(--secundario);
+    color: var(--blanco);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.boton-admin:hover {
+    background-color: #007c8a;
+}
+
+/* Admin controls in product card */
+.admin-opciones {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+.boton-card-editar, .boton-card-eliminar {
+    flex: 1;
+    border: none;
+    padding: 0.8rem 1rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    text-align: center;
+    transition: opacity 0.2s ease;
+}
+.boton-card-editar {
+    background-color: var(--primario);
+    color: var(--oscuro);
+}
+.boton-card-eliminar {
+    background-color: #f44336;
+    color: var(--blanco);
+}
+.boton-card-editar:hover, .boton-card-eliminar:hover {
+    opacity: 0.9;
+}
+
+/* Dialog Styles */
+dialog {
+    border: none;
+    border-radius: 1.2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 0;
+    width: min(500px, 95vw);
+    background: var(--blanco);
+}
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+.formulario-modal {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.formulario-modal h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 2.4rem;
+    border-bottom: 2px solid var(--secundario);
+    padding-bottom: 1rem;
+    color: var(--secundario);
+}
+.campo-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.campo-modal label {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--oscuro);
+    text-align: left;
+}
+.campo-modal input {
+    padding: 1rem;
+    border: 1px solid var(--gris);
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+}
+.campo-modal input:focus {
+    outline: none;
+    border-color: var(--secundario);
+    box-shadow: 0 0 5px rgba(0, 151, 167, 0.4);
+}
+.campo-modal input:disabled {
+    background-color: #e9ecef;
+    color: #495057;
+    cursor: not-allowed;
+}
+.especificaciones-grupo {
+    border: 1px solid var(--gris);
+    border-radius: 0.8rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+.especificaciones-grupo legend {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--secundario);
+    padding: 0 0.5rem;
+    text-transform: uppercase;
+}
+.form-botones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+.boton-dialogo {
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.boton-dialogo:hover {
+    opacity: 0.9;
+}
+.boton-dialogo.guardar {
+    background-color: var(--secundario);
+    color: var(--blanco);
+}
+.boton-dialogo.cancelar {
+    background-color: var(--gris);
+    color: var(--blanco);
+}

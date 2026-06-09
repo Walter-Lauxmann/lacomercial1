@@ -37,5 +37,19 @@ export const productos = [
         precio: 23289900,
         imagen: 'Iphone-11-Pro-Max.jpg',
         categoria: 'Telefonía'
-    }
+    },
+    {
+        codigo: 105,
+        nombre: 'Alcatel 1V Plus',
+        descripcion: {
+            procesador: 'Chip A13 Bionic',
+            almacenamiento: '256 GB',
+            camaras: '12 Mp / 12 Mp (Triple)',
+            pantalla: '5,8 Super Retina XDR - OLED Multi - Touch'
+        },
+        precio: 23289900,
+        imagen: 'Alcatel-1V-Plus.jpg',
+        categoria: 'Telefonía'
+    },
+
 ]
