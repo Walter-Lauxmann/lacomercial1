@@ -26,6 +26,30 @@ const inicializarEventos = () => {
     btnCancelar.addEventListener('click', () => {
         dialogo.close();
     });
+
+    // Envío del formulario
+    formProducto.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const codigo = Number(inputCodigo.value);
+        const productoData = {
+            codigo,
+            nombre: document.getElementById('prod-nombre').value,
+            categoria: document.getElementById('prod-categoria').value,
+            precio: Number(document.getElementById('prod-precio').value),
+            imagen: document.getElementById('prod-imagen').value || 'nodisponible.png',
+            descripcion: {
+                procesador: document.getElementById('prod-procesador').value,
+                almacenamiento: document.getElementById('prod-almacenamiento').value,
+                camaras: document.getElementById('prod-camaras').value,
+                pantalla: document.getElementById('prod-pantalla').value
+            }
+        };
+       
+        insertar(productoData);
+        dialogo.close();
+
+    });
 }
 
 const obtenerProductos = () => {
@@ -64,3 +88,26 @@ const mostrarProductos = () => {
         `
     ))
 }
+
+// Guardar productos en localStorage
+const guardarProductos = (lista) => {
+    localStorage.setItem('productos', JSON.stringify(lista));
+};
+
+/**
+ * Agrega un nuevo producto a localStorage y vuelve a renderizar
+ * @param {Object} productoNuevo - Objeto con los datos del nuevo producto
+ * @returns {boolean} - true si se insertó correctamente, false si ya existe
+ */
+export const insertar = (productoNuevo) => {
+    const productos = obtenerProductos();
+    const existe = productos.some(p => Number(p.codigo) === Number(productoNuevo.codigo));
+    if (existe) {
+        alert('Ya existe un producto con el código ' + productoNuevo.codigo);
+        return false;
+    }
+    productos.push(productoNuevo);
+    guardarProductos(productos);
+    mostrarProductos();
+    return true;
+};
