@@ -1,4 +1,4 @@
-import { productos as productosIniciales } from "../modelos/productos.js";
+import { seleccionarProductos } from "../modelos/productos.js";
 
 // Elementos del DOM
 const listaProductos = document.querySelector('#lista-productos');
@@ -10,6 +10,10 @@ const dialogoTitulo = document.querySelector('#dialogo-titulo');
 const inputCodigo = document.querySelector('#prod-codigo');
 const inputModoEdicion = document.querySelector('#modo-edicion');
 
+// Variables
+let productos = [];
+let producto = {}
+
 document.addEventListener("DOMContentLoaded", ()=> {
     mostrarProductos();
     inicializarEventos();
@@ -19,6 +23,8 @@ const inicializarEventos = () => {
     // Abrir el modal de creación
     btnNuevo.addEventListener('click', () => {
         dialogoTitulo.textContent = 'Cargar Producto';
+        inputModoEdicion.value = 'false';
+        inputCodigo.disabled = false;
         formProducto.reset();
         dialogo.showModal();
     });
@@ -63,21 +69,21 @@ const inicializarEventos = () => {
     });
 }
 
-const obtenerProductos = () => {
-    const prodStr = localStorage.getItem('productos');
-    if(!prodStr) {
-        localStorage.setItem('productos', JSON.stringify(productosIniciales));
-        return productosIniciales;
-    }
-    return JSON.parse(prodStr);
+/**
+ * Obtiene los productos de la API
+ * @returns productos: array de los productos
+ */
+const obtenerProductos = async () => {
+    productos = await seleccionarProductos();
+    return productos;
 }
 
 /**
  * Muestra la lista de productos
  */
-const mostrarProductos = () => {
+const mostrarProductos = async () => {
     listaProductos.innerHTML = '';
-    const productos = obtenerProductos();
+    productos = await obtenerProductos();
     productos.map(producto => (
         listaProductos.innerHTML += `
             <article class="servicio">
@@ -85,16 +91,15 @@ const mostrarProductos = () => {
                 <div class="servicio-icono">
                     <img src="./imagenes/productos/${producto.imagen}" alt="">
                 </div>
-                <p>
-                    <img src="./imagenes/memory.svg" alt="">Procesador: ${producto.descripcion.procesador} <br>
-                    <img src="./imagenes/storage.svg" alt="">Almacenamiento: ${producto.descripcion.almacenamiento} <br>
-                    <img src="./imagenes/photo_camera.svg" alt="">Cámaras: ${producto.descripcion.camaras} <br>
-                    <img src="./imagenes/aod.svg" alt="">Pantalla: ${producto.descripcion.pantalla}
-                </p>
+                <div style="text-align: center">
+                    <img src="./imagenes/memory.svg" alt=""> | 
+                    <img src="./imagenes/storage.svg" alt=""> | 
+                    <img src="./imagenes/photo_camera.svg" alt=""> | 
+                    <img src="./imagenes/aod.svg" alt="">
+                    <p>${producto.descripcion}</p>
+                </div>
                 <h4>$ <span name="precio">${producto.precio}</span>.-</h4>
-
-                <button class="boton" onclick="agregar(this)">Comprar</button>
-                
+                <button class="boton" onclick="agregar(this)">Comprar</button>                
                 <div class="admin-opciones">
                     <button class="boton-card-editar" data-codigo="${producto.codigo}">Editar</button>
                     <button class="boton-card-eliminar" data-codigo="${producto.codigo}">Eliminar</button>
@@ -129,7 +134,7 @@ export const insertar = (productoNuevo) => {
 
 /**
  * Modifica un producto del localStorage y vuelve a renderizar
- * @param {number} codigo  - Código del producto a modificar
+ * @param {*} codigo  - Código del producto a modificar
  * @param {Object} productoModificado - Objeto con los datos del producto modificado
  * @returns {boolean} - true si se modificó correctamente
  */
@@ -149,7 +154,7 @@ export const modificar = (codigo, productoModificado) => {
 
 /**
  * 
- * @param {number} codigo - Código del producto a eliminar
+ * @param {*} codigo - Código del producto a eliminar
  * @returns {boolean} - true si se eliminó correctamente
  */
 export const eliminar = (codigo) => {
@@ -163,6 +168,35 @@ export const eliminar = (codigo) => {
     return false;
 }
 
+/**
+ * Abre el formulario con los datos del producto
+ * @param {*} codigo - Código del producto a modificar
+ * @returns 
+ */
+const abrirModalModificar = (codigo) => {
+    const productos = obtenerProductos();
+    const producto = productos.find(p => Number(p.codigo) === Number(codigo));
+    
+    if(!producto) return;
+    
+    dialogoTitulo.textContent = 'Modificar Producto';
+    inputModoEdicion.value = true;
+    
+    inputCodigo.value = producto.codigo;
+    inputCodigo.disabled = true;
+    
+    document.getElementById('prod-nombre').value = producto.nombre;
+    document.getElementById('prod-categoria').value = producto.categoria;
+    document.getElementById('prod-precio').value = producto.precio;
+    document.getElementById('prod-imagen').value = producto.imagen;
+    document.getElementById('prod-procesador').value = producto.descripcion.procesador;
+    document.getElementById('prod-almacenamiento').value = producto.descripcion.almacenamiento;
+    document.getElementById('prod-camaras').value = producto.descripcion.camaras;
+    document.getElementById('prod-pantalla').value = producto.descripcion.pantalla;
+    
+    dialogo.showModal();
+}
+
 // Delegación de eventos para los botones Editar y Eliminar
 listaProductos.addEventListener('click', (e) => {
     const target = e.target;
@@ -174,27 +208,3 @@ listaProductos.addEventListener('click', (e) => {
         eliminar(codigo);
     }
 })
-
-const abrirModalModificar = (codigo) => {
-    const productos = obtenerProductos();
-    const producto = productos.find(p => Number(p.codigo) === Number(codigo));
-
-    if(!producto) return;
-
-    dialogoTitulo.textContent = 'Modificar Producto';
-    inputModoEdicion.value = true;
-
-    inputCodigo.value = producto.codigo;
-    inputCodigo.disabled = true;
-
-    document.getElementById('prod-nombre').value = producto.nombre;
-    document.getElementById('prod-categoria').value = producto.categoria;
-    document.getElementById('prod-precio').value = producto.precio;
-    document.getElementById('prod-imagen').value = producto.imagen;
-    document.getElementById('prod-procesador').value = producto.descripcion.procesador;
-    document.getElementById('prod-almacenamiento').value = producto.descripcion.almacenamiento;
-    document.getElementById('prod-camaras').value = producto.descripcion.camaras;
-    document.getElementById('prod-pantalla').value = producto.descripcion.pantalla;
-
-    dialogo.showModal();
-}
