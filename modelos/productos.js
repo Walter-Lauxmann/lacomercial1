@@ -17,8 +17,8 @@ export async function seleccionarProductos() {
  * Inserta los datos en la BD
  * @param datos los datos a insertar
  */
-export function insertarProductos(datos) {
-    fetch(`${URL}&accion=insertar`, {
+export async function insertarProducto(datos) {
+    let res = await fetch(`${URL}&accion=insertar`, {
         method: 'POST',
         body: datos
     })
@@ -26,5 +26,6 @@ export function insertarProductos(datos) {
     .then(data => {
         console.log(data);
         return data;
-    })
+    });
+    return res;
 }

@@ -1,6 +1,7 @@
-import { seleccionarProductos } from "../modelos/productos.js";
+import { seleccionarProductos, insertarProducto } from "../modelos/productos.js";
 
 // Elementos del DOM
+const alerta = document.querySelector('#alerta');
 const listaProductos = document.querySelector('#lista-productos');
 const btnNuevo = document.querySelector('#btn-nuevo-producto');
 const dialogo = document.querySelector('#dialogo-producto');
@@ -12,7 +13,8 @@ const inputModoEdicion = document.querySelector('#modo-edicion');
 
 // Variables
 let productos = [];
-let producto = {}
+let producto = {};
+let respuesta = {};
 
 document.addEventListener("DOMContentLoaded", ()=> {
     mostrarProductos();
@@ -35,38 +37,45 @@ const inicializarEventos = () => {
     });
 
     // Envío del formulario
-    formProducto.addEventListener('submit', (e) => {
+    formProducto.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const codigo = Number(inputCodigo.value);
-        const productoData = {
-            codigo,
-            nombre: document.getElementById('prod-nombre').value,
-            categoria: document.getElementById('prod-categoria').value,
-            precio: Number(document.getElementById('prod-precio').value),
-            imagen: document.getElementById('prod-imagen').value || 'nodisponible.png',
-            descripcion: {
-                procesador: document.getElementById('prod-procesador').value,
-                almacenamiento: document.getElementById('prod-almacenamiento').value,
-                camaras: document.getElementById('prod-camaras').value,
-                pantalla: document.getElementById('prod-pantalla').value
-            }
-        };
+        const productoData = new FormData(formProducto);
 
         const esEdicion = inputModoEdicion.value === 'true';
-        let exito = false;
 
         if (esEdicion) {
-            exito = modificar(codigo, productoData);
+            respuesta = modificar(codigo, productoData);
         } else {
-            exito = insertar(productoData);
+            respuesta = await insertarProducto(productoData);
         }
 
-        if(exito) {
+        if(respuesta.success) {
+            insertarAlerta(respuesta.message, 'success');
+            dialogo.close();
+        } else {
+            insertarAlerta(respuesta.message, 'warning');
             dialogo.close();
         }
 
     });
+}
+
+/**
+ * Define el mensaje de alerta
+ * @param {*} mensaje El mensaje a mostrar
+ * @param {*} tipo El tipo de alerta (primary, secondary, success, warning, danger, ...)
+ */
+const insertarAlerta = (mensaje, tipo) => {
+    const envoltorio = document.createElement('div');
+    envoltorio.innerHTML = `
+        <div class="alert alert-${tipo} alert-dismisible" role="alert">
+            <div>${mensaje}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    `;
+    alerta.append(envoltorio);
 }
 
 /**

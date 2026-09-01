@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Comercial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/estilos.css">
 </head>
 <body>
@@ -21,6 +22,7 @@
         </div>
     </nav>
     <main class="contenedor sombra">
+        <div id="alerta"></div>
         <div class="titulo-admin-flex">
             <h2>Listado de productos</h2>
             <button id="btn-nuevo-producto" class="boton-admin">
@@ -68,44 +70,29 @@
             <input type="hidden" id="modo-edicion" value="false" />
             <div class="campo-modal">
                 <label for="prod-codigo">Código:</label>
-                <input type="number" id="prod-codigo" min="1" required>
+                <input type="number" id="prod-codigo" name="codigo" min="1" required>
             </div>
             <div class="campo-modal">
                 <label for="prod-nombre">Nombre:</label>
-                <input type="text" id="prod-nombre" required>
-            </div>
-            <div class="campo-modal">
-                <label for="prod-categoria">Categoría:</label>
-                <input type="text" id="prod-categoria" required>
+                <input type="text" id="prod-nombre" name="nombre" required>
             </div>
             <div class="campo-modal">
                 <label for="prod-precio">Precio ($):</label>
-                <input type="number" id="prod-precio" min="0" required>
+                <input type="number" id="prod-precio" name="precio" min="0" required>
             </div>
             <div class="campo-modal">
                 <label for="prod-imagen">Imagen (ej.: default.jpg):</label>
-                <input type="text" id="prod-imagen" placeholder="default.jpg">
+                <input type="text" id="prod-imagen" name="imagen" placeholder="default.jpg">
             </div>
 
             <fieldset class="especificaciones-grupo">
-                <legend>Especificaciones</legend>
+                <legend>Descripción</legend>
 
-                <div class="campo-modal">
-                    <label for="prod-procesador">Procesador:</label>
-                    <input type="text" id="prod-procesador">
+                <div class="campo-modal">                    
+                    <textarea type="text" id="prod-descripcion" name="descripcion" placeholder="--Escriba aquí--">
+                    </textarea>
                 </div>
-                <div class="campo-modal">
-                    <label for="prod-almacenamiento">Almacenamiento:</label>
-                    <input type="text" id="prod-almacenamiento">
-                </div>
-                <div class="campo-modal">
-                    <label for="prod-camaras">Cámaras:</label>
-                    <input type="text" id="prod-camaras">
-                </div>
-                <div class="campo-modal">
-                    <label for="prod-pantalla">Pantalla:</label>
-                    <input type="text" id="prod-pantalla">
-                </div>
+                
             </fieldset>
 
             <div class="form-botones">
@@ -123,6 +110,7 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script type="module" src="./controladores/lista-productos.js"></script>
     <script src="./controladores/carrito-compras.js"></script>
 </body>
