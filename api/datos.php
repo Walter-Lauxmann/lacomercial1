@@ -6,8 +6,12 @@ require_once 'modelos.php';
 if(isset($_GET['tabla'])) {
     $tabla = new Modelo($_GET['tabla']); // Creamos el objeto $tabla   
 
+    if(isset($_GET['id'])) { // Si está seteado el id
+        $tabla->setCriterio("id=" . $_GET['id']); // Establecemos el criterio
+    }
+
     if(isset($_GET['accion'])) { // Si está seteada la acción
-        if($_GET['accion'] == 'insertar') { // Si la acción es insertar 
+        if($_GET['accion'] == 'insertar' || $_GET['accion'] == 'actualizar') { // Si la acción es insertar o actualizar
             $valores = $_POST; // Guardamos los valores que vienen desde el formulario            
         }        
 
@@ -39,6 +43,24 @@ if(isset($_GET['tabla'])) {
                 // Siempre enviamos la respuesta JSON al final
                 echo json_encode($respuesta);
                 break;
+
+                case 'actualizar':
+                    $tabla->actualizar($valores);
+                    $respuesta = [
+                        'success' => true,
+                        'message' => 'Registro actualizado con éxito'
+                    ];
+                    echo json_encode($respuesta);
+                    break;
+
+                case 'eliminar':
+                    $tabla->eliminar();
+                    $respuesta = [
+                        'success' => true,
+                        'message' => 'Registro eliminado con éxito'
+                    ];
+                    echo json_encode($respuesta);
+                    break;
 
             
         }

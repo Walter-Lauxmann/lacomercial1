@@ -120,5 +120,29 @@ class Modelo extends Conexion {
             return 0; 
         }
     }
+
+    /**
+     * Actualiza un registro en la BD
+     * @param $datos: los datos a modificar
+     */
+    public function actualizar ($datos) {
+        // UPDATE productos SET codigo='101', nombre='Samsung A56', ... WHERE id='3'
+        $actualizaciones = [];
+        foreach($datos as $key => $value) {
+            $actualizaciones[] = "$key='$value'";
+        }
+        $sql = "UPDATE $this->tabla SET " . implode(",", $actualizaciones) . " WHERE $this->criterio";
+        // echo $sql;
+        $this->db->query($sql);
+    }
+
+    /**
+     * Elimina un registro de la BD
+     */
+    public function eliminar() {
+        // DELETE FROM productos WHERE id='1'
+        $sql = "DELETE FROM $this->tabla WHERE $this->criterio";
+        $this->db->query($sql);
+    }
 }
 ?>
