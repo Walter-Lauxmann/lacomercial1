@@ -10,6 +10,7 @@ const btnCancelar = document.querySelector('#btn-cancelar');
 const dialogoTitulo = document.querySelector('#dialogo-titulo');
 const inputCodigo = document.querySelector('#prod-codigo');
 const inputModoEdicion = document.querySelector('#modo-edicion');
+const formImagen = document.querySelector('#form-imagen');
 
 // Variables
 let productos = [];
@@ -99,7 +100,7 @@ const mostrarProductos = async () => {
             <article class="servicio">
                 <h3><span name="codigo">${producto.codigo}</span> - <span name="nombre">${producto.nombre}</span></h3>
                 <div class="servicio-icono">
-                    <img src="./imagenes/productos/${producto.imagen}" alt="">
+                    <img src="./imagenes/productos/${producto.imagen || 'nodisponible.png'}" alt="">
                 </div>
                 <div style="text-align: center">
                     <img src="./imagenes/memory.svg" alt=""> | 
@@ -152,8 +153,9 @@ const abrirModalModificar = (id) => {
     
     document.getElementById('prod-nombre').value = producto.nombre;
     document.getElementById('prod-precio').value = producto.precio;
-    document.getElementById('prod-imagen').value = producto.imagen;
     document.getElementById('prod-descripcion').value = producto.descripcion;
+
+    formImagen.src = `./imagenes/productos/${producto.imagen}`;
     
     dialogo.showModal();
 }
