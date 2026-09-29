@@ -10,12 +10,16 @@
            $this->db = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 
            if( $this->db->connect_errno ) {
-             echo 'Fallo al conectar a MySQL: ' . $this->db->connect_error;
-             return;
+            header("Content-Type: application/json");
+             echo json_encode([
+                'success' => false,
+                'message' => 'Fallo al conectar a MySQL: ' . $this->db->connect_error
+             ]);
+             exit;
            }
 
            $this->db->set_charset(DB_CHARSET);
-           $this->db->query("SET NAMES 'utf8'");
+           $this->db->query("SET NAMES 'utf8mb4'");
         }
     }
 
@@ -89,10 +93,8 @@ class Modelo extends Conexion {
         // echo $sql; // Mostramos la instrucción SQL
         // Ejecutamos la instrucción SQL
         $resultado = $this->db->query($sql);
-        $datos = $resultado->fetch_all(MYSQLI_ASSOC); // Guardamos los datos en un Array asociativo
-        $datos = json_encode($datos); // Convertimos los datos a JSON
-        // Devolvemos los datos
-        return $datos;
+        return $resultado ? $resultado->fetch_all(MYSQLI_ASSOC) : []; // Guardamos los datos en un Array asociativo
+        
     }
 
      /**
@@ -103,7 +105,18 @@ class Modelo extends Conexion {
     public function insertar($datos) {
         // INSERT INTO productos (codigo, nombre, descripcion, precio, stock, imagen)
         // VALUES ('201', 'Motorola G9', 'Un gran teléfono', '450000', '30', 'motorola.jpg')
-        unset($datos->id); // Eliminamos el valor de id
+        if(isset($datos['id'])) {
+            unset($datos['id']); // Eliminamos el valor de id
+        }
+
+        if(isset($datos['password'])) {
+            $password_plano = $datos['password'];
+
+            // Generamos el hash seguro
+            $password_hash = password_hash($password_plano, PASSWORD_DEFAULT);
+            $datos['password'] = $password_hash;
+        }
+        
         $campos = implode(",",array_keys($datos)); // Separar las claves del array
         $valores = implode("','", array_values($datos)); // Separamos los valores del array
 

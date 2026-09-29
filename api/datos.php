@@ -1,6 +1,10 @@
 <?php
+
+header("Content-Type: application/json; charset=utf-8");
+
 // Requerimos el archivo modelos.php
 require_once 'modelos.php';
+require_once 'auth.php';
 
 // Si hay un parámetro tabla
 if(isset($_GET['tabla'])) {
@@ -15,13 +19,13 @@ if(isset($_GET['tabla'])) {
             $valores = $_POST; // Guardamos los valores que vienen desde el formulario
             
             // **** SUBIDA DE IMÁGENES **** //
-        if(                                             // Si
+            if(                                         // Si
                 isset($_FILES) &&                       // Está seteado $_FILES Y
                 isset($_FILES['imagen']) &&             // Está seteado imagen dentro de $_FILES
-                !empty($_FILES['imagen']['name'] &&     // Si NO está vacío el nombre Y
-                !empty($_FILES['imagen']['tmp_name']))  // el nombre temporal
+                !empty($_FILES['imagen']['name']) &&     // Si NO está vacío el nombre Y
+                !empty($_FILES['imagen']['tmp_name'])  // el nombre temporal
             ) {
-            if(is_uploaded_file($_FILES['imagen']['tmp_name'])) {                       // Si está subido el archivo temporal
+                if(is_uploaded_file($_FILES['imagen']['tmp_name'])) {                   // Si está subido el archivo temporal
                     $nombre_temporal = $_FILES['imagen']['tmp_name'];                   // Guardamos el nombre temporal
                     $nombre = $_FILES['imagen']['name'];                                // Guardamos el nombre
                     $destino = '../imagenes/productos/' . $nombre;                      // Guardamos la carpeta de subida
@@ -51,10 +55,11 @@ if(isset($_GET['tabla'])) {
         switch ($_GET['accion']) { // Según la acción
             case 'seleccionar':
                 $datos = $tabla->seleccionar(); // Ejecutamos el método seleccionar
-                print_r($datos) ; // Mostramos los datos
+                echo json_encode($datos) ; // Mostramos los datos
                 break;
 
-            case 'insertar':                
+            case 'insertar':                 
+                $usuario = validarToken(['cliente', 'admin']);
                 // Ejecutamos el método insertar y capturamos el ID
                 $id = $tabla->insertar($valores);
     
@@ -78,6 +83,7 @@ if(isset($_GET['tabla'])) {
                 break;
 
                 case 'actualizar':
+                    $usuario = validarToken(['cliente', 'admin']);
                     $tabla->actualizar($valores);
                     $respuesta = [
                         'success' => true,
@@ -87,6 +93,7 @@ if(isset($_GET['tabla'])) {
                     break;
 
                 case 'eliminar':
+                    $usuario = validarToken(['admin']);
                     $tabla->eliminar();
                     $respuesta = [
                         'success' => true,

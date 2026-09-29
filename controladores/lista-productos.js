@@ -102,6 +102,7 @@ const mostrarProductos = async () => {
                 <div class="servicio-icono">
                     <img src="./imagenes/productos/${producto.imagen || 'nodisponible.png'}" alt="">
                 </div>
+
                 <div style="text-align: center">
                     <img src="./imagenes/memory.svg" alt=""> | 
                     <img src="./imagenes/storage.svg" alt=""> | 
@@ -109,6 +110,7 @@ const mostrarProductos = async () => {
                     <img src="./imagenes/aod.svg" alt="">
                     <p>${producto.descripcion}</p>
                 </div>
+                
                 <h4>$ <span name="precio">${producto.precio}</span>.-</h4>
                 <button class="boton" onclick="agregar(this)">Comprar</button>                
                 <div class="admin-opciones">
