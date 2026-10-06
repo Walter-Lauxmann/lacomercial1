@@ -59,7 +59,7 @@ if(isset($_GET['tabla'])) {
                 break;
 
             case 'insertar':                 
-                $usuario = validarToken(['cliente', 'admin']);
+                // $usuario = validarToken(['cliente', 'admin']);
                 // Ejecutamos el método insertar y capturamos el ID
                 $id = $tabla->insertar($valores);
     

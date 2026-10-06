@@ -75,7 +75,7 @@ class Modelo extends Conexion {
     /**
     * Método de selección
     * Permite seleccionar registros de una tabla de BD
-    * @return $datos
+    * @return array $resultado
     */
     public function seleccionar() {
         // SELECT * FROM productos WHERE id='10' ORDER BY id LIMIT 10
