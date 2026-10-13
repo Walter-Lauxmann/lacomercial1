@@ -2,9 +2,8 @@
     --blanco: #ffffff;
     --oscuro: #202020;
     --gris: #757575;
-    --gris-claro: #cccccc;
-    --primario: #ffc107;
-    --secundario: #0097a7;
+    --primario: #ffC107;
+    --secundario: #0097A7;
 }
 
 html {
@@ -19,39 +18,37 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--oscuro);
-    background-image: linear-gradient(to top, var(--gris-claro) 0%, var(--blanco) 100%);
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--oscuro);
+  background-image: linear-gradient(to top, #DFE9F3 0%, var(--blanco) 100%);
+  margin: 0;
 }
-
 header {
   background-color: var(--secundario);
 }
-
-h1 {
+header h1 {
   color: var(--primario);
   text-align: center;
-  text-transform: uppercase;
   font-size: 3.8rem;
 }
-
 h2 {
     font-size: 2.8rem;
     color: var(--secundario);
 }
-
 h3 {
     font-size: 1.8rem;
     color: var(--secundario);
 }
 
-/* Estilo del menú de navegación */
+/** Menú de navegación **/
 .menu {
     background-color: var(--oscuro);
     color: var(--blanco);
+}
+
+.contenedor {
+    max-width: 120rem;
+    margin: 0 auto;
 }
 
 .menu-flex {
@@ -74,7 +71,7 @@ h3 {
 .menu ul li {
     margin: 2px;
     padding: 2px;
-    border: 1px solid var(--gris-claro);
+    border: 1px solid var(--gris);
 }
 
 .menu ul li a {
@@ -85,7 +82,7 @@ h3 {
     color: var(--blanco);
     text-align: center;
     font-size: 11px;
-    border-left: 10px solid var(--gris-claro);
+    border-left: 10px solid var(--gris);
 }
 
 .menu ul li a:hover {
@@ -94,14 +91,13 @@ h3 {
     border-left-color: var(--primario);
 }
 
-.contenedor {
-    max-width: 120rem;
-    margin: 0 auto;
+.img-completa {
+    width: 100%;
 }
 
 /** Sección principal **/
 .principal {
-    background-image: url(../imagenes/slide4.jpeg);
+    background-image: url('../images/slide4.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 450px;
@@ -126,25 +122,10 @@ h3 {
     align-items: flex-end;
 }
 
-.boton {
-    background-color: var(--secundario);
-    color: var(--blanco);
-    padding: 1rem 3rem;
-    margin-top: 3rem;
-    font-size: 2rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    border-radius: 0.5rem;
-    width: 90%;
-    text-align: center;
-    border: none;
-}
-
-@media (min-width: 768px) {
-    .boton {
-        width: auto;
-    }
+/** Main **/
+.contenedor {
+    max-width: 120rem;
+    margin: 0 auto;
 }
 
 .sombra {
@@ -154,7 +135,7 @@ h3 {
     border-radius: 1rem;
 }
 
-/* Servicios */
+/** Servicios **/
 @media(min-width: 768px) {
     .servicios {
         display: grid;
@@ -184,7 +165,69 @@ h3 {
     width: 75%;
 }
 
-/* Carrito de compras */
+/** Botón **/
+.boton {
+    background-color: var(--secundario);
+    color: var(--blanco);
+    padding: 1rem 3rem;
+    margin-top: 3rem;
+    font-size: 2rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    width: 90%;
+    text-align: center;
+    border: none;
+}
+
+@media (min-width: 768px) {
+    .boton {
+        width: auto;
+    }
+}
+
+/** Formulario **/
+.formulario {
+    background-color: var(--oscuro);
+    width: min(60rem, 100%);
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.formulario fieldset {
+    border: none;
+}
+
+.formulario legend {
+    color: var(--primario);
+    text-align: center;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.campo {
+    margin-bottom: 1rem;
+    color: var(--blanco);
+}
+
+.campo label {
+    color: var(--blanco);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.input-text {
+    width: 100%;
+    border: none;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+/** Carrito de compras **/
 .carrito {
     background-color: var(--oscuro);
     color: var(--blanco);
@@ -202,6 +245,11 @@ h3 {
 }
 
 .carrito table thead {
+    background-color: var(--secundario);
+    color: var(--blanco);
+}
+
+.carrito table tfoot {
     background-color: var(--primario);
     color: var(--oscuro);
     font-size: 1.2rem;
@@ -212,54 +260,56 @@ h3 {
     width: 50%;
 }
 
-/*-- MODO MOVIL --*/
+/* --- MODO MÓVIL --- */
 @media screen and (max-width: 600px) {
-    .carrito table, thead, tbody, tfoot, th, td, tr {
-        display: block;
-    }
+  
+  /* Quitamos los bordes de la tabla y ocultamos el encabezado */
+  .carrito table, thead, tbody, tfoot, th, td, tr {
+    display: block;
+  }
 
-    .carrito thead tr {
-        display: none;
-    }
+  .carrito thead tr {
+    display: none; /* Adiós a los encabezados horizontales */
+  }
 
-    .carrito tr {
-        margin-bottom: 20px;
-        border: 2px solid var(--secundario);
-        border-radius: 8px;
-        padding: 10px;
-    }
+  .carrito tr {
+    margin-bottom: 20px;
+    border: 2px solid #007bff; /* Resaltamos cada "producto" */
+    border-radius: 8px;
+    padding: 10px;
+  }
 
-    .carrito td {
-        border: none;
-        position: relative;
-        padding-left: 50% !important;
-        text-align: right;
-        border-bottom: 1px solid var(--gris-claro);
-    }
+  .carrito td {
+    border: none;
+    position: relative;
+    padding-left: 50% !important; /* Espacio para el nombre de la columna */
+    text-align: right;
+    border-bottom: 1px solid #eee;
+  }
 
-    .carrito td::before {
-        content: attr(data-label);
-        position:absolute;
-        left: 10px;
-        width: 40%;
-        font-weight: bold;
-        text-align: left;
-        color: var(--gris-claro);
-    }
+  /* Insertamos el texto del data-label antes del valor */
+  .carrito td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: 40%;
+    font-weight: bold;
+    text-align: left;
+    color: #555;
+  }
 
-    .carrito tfoot tr {
-        border: none;
-        background: var(--gris);
-        color: var(--oscuro);
-        font-weight: bold;
-        font-size: 1.2rem;
-    }
+  /* Estilo especial para el footer (Total) */
+  .carrito tfoot tr {
+    border: none;
+    background: #f8f9fa;
+  }
 
-    .carrito tfoot td:first-child {
-        display: none;
-    }
+  .carrito tfoot td:first-child {
+    display: none; /* Ocultamos la celda vacía con colspan */
+  }
 }
 
+/** Pié de página **/
 footer {
     text-align: center;
 }
@@ -414,3 +464,4 @@ dialog::backdrop {
     background-color: var(--gris);
     color: var(--blanco);
 }
+

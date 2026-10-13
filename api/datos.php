@@ -15,15 +15,21 @@ if(isset($_GET['tabla'])) {
     }
 
     if(isset($_GET['accion'])) { // Si está seteada la acción
-        if($_GET['accion'] == 'insertar' || $_GET['accion'] == 'actualizar') { // Si la acción es insertar o actualizar
-            $valores = $_POST; // Guardamos los valores que vienen desde el formulario
+        $accion = $_GET['accion'];
+
+        if(in_array($accion, ['insertar', 'actualizar', 'eliminar'], true)) {
+            validarToken(['admin']);
+        }
+        $valores = $_POST; // Guardamos los valores que vienen desde el formulario
+        
+        if($accion == 'insertar' || $accion == 'actualizar') { // Si la acción es insertar o actualizar
             
             // **** SUBIDA DE IMÁGENES **** //
             if(                                         // Si
                 isset($_FILES) &&                       // Está seteado $_FILES Y
                 isset($_FILES['imagen']) &&             // Está seteado imagen dentro de $_FILES
-                !empty($_FILES['imagen']['name']) &&     // Si NO está vacío el nombre Y
-                !empty($_FILES['imagen']['tmp_name'])  // el nombre temporal
+                !empty($_FILES['imagen']['name']) &&    // Si NO está vacío el nombre Y
+                !empty($_FILES['imagen']['tmp_name'])   // el nombre temporal
             ) {
                 if(is_uploaded_file($_FILES['imagen']['tmp_name'])) {                   // Si está subido el archivo temporal
                     $nombre_temporal = $_FILES['imagen']['tmp_name'];                   // Guardamos el nombre temporal
@@ -83,8 +89,8 @@ if(isset($_GET['tabla'])) {
                 break;
 
                 case 'actualizar':
-                    $usuario = validarToken(['cliente', 'admin']);
-                    $tabla->actualizar($valores);
+                    
+                    $resultado = $tabla->actualizar($valores);
                     $respuesta = [
                         'success' => true,
                         'message' => 'Registro actualizado con éxito'
@@ -92,15 +98,21 @@ if(isset($_GET['tabla'])) {
                     echo json_encode($respuesta);
                     break;
 
-                case 'eliminar':
-                    $usuario = validarToken(['admin']);
-                    $tabla->eliminar();
+                case 'eliminar':                    
+                    $resultado = $tabla->eliminar();
                     $respuesta = [
-                        'success' => true,
+                        'success' => (bool)$resultado,
                         'message' => 'Registro eliminado con éxito'
                     ];
                     echo json_encode($respuesta);
                     break;
+
+                default:
+                    echo json_encode([
+                    'success' => false,
+                    'message' => 'Acción no válida'
+                ]);
+                break;
 
             
         }

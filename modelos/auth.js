@@ -1,5 +1,5 @@
 const URL_LOGIN = './api/login.php';
-const URL_REGISTRO = './api/datos.php?tabla=usuarios&accion=insertar';
+const URL_REGISTRO = './api/registro.phpr';
 
 /**
  * Envía los datos del nuevo usuario para insertarlos en la BD
@@ -43,4 +43,19 @@ export const logout = () => {
     sessionStorage.removeItem('jwt_token');
     sessionStorage.removeItem('usuario_info');
     window.location.reload();
+}
+
+/**
+ * Obtiene el token guardado en el navegador
+ */
+export function obtenerToken() {
+    return sessionStorage.getItem('jwt_token');
+}
+
+/**
+ * Obtiene la información del usuario autenticado
+ */
+export function obtenerUsuarioActual() {
+    const usuario = sessionStorage.getItem('usuario_info');
+    return usuario ? JSON.parse(usuario) : null;
 }

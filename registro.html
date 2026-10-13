@@ -15,34 +15,37 @@
 <body>
 
     <main class="contenedor sombra">
-        <h1>Registrarse</h1>
+        <h2>Registrarse</h2>
         <div id="alerta"></div>
 
-        <form id="form-registro">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
-                <label for="nombre">Nombre</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" required>
-                <label for="apellido">Apellido</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre de usuario" required>
-                <label for="usuario">Usuario</label>
-            </div>
-            <div class="form-floating">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                <label for="password">Password</label>
-            </div>
-
-            <button type="submit" class="boton">Ingresar</button>
-            <p class="text-center">
-                ¿Ya tenés cuenta?
-                <a href="login.html">Iniciá sesión acá</a>
-            </p>
+        <form class="formulario" id="form-registro">
+            <fieldset>
+                <legend>Por favor, complete el siguiente formulario.</legend>
+                <table class="contenedor-campos">
+                    <tr class="campo">
+                        <td><label for="nombre">Nombre</label></td>
+                        <td><input type="text" class="form-control input-text" id="nombre" name="nombre" placeholder="Nombre" required /></td>
+                    </tr>
+                    <tr class="campo">
+                        <td><label for="apellido">Apellido</label></td>
+                        <td><input type="text" class="form-control input-text" id="apellido" name="apellido" placeholder="Apellido" required /></td>
+                    </tr>
+                    <tr class="campo">
+                        <td><label for="usuario">Usuario</label></td>
+                        <td><input type="text" class="form-control input-text" id="usuario" name="usuario" placeholder="Nombre de usuario" required /></td>
+                    </tr>
+                    <tr class="campo">
+                        <td><label for="password">Password</label></td>
+                        <td><input type="password" class="form-control input-text" id="password" name="password" placeholder="Password" required /></td>
+                    </tr>
+                </table>    
+                <button type="submit" class="boton">Ingresar</button>
+                <p class="text-center text-white">
+                    ¿Ya tenés cuenta?
+                    <a href="login.html">Iniciá sesión acá</a>
+                </p>
+            </fieldset>
         </form>
-
     </main>
 
     <footer>

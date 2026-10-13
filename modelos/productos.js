@@ -1,3 +1,4 @@
+
 // URL para acceder a la API
 const URL = './api/datos.php?tabla=productos';
 
